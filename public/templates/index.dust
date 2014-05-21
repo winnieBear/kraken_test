@@ -1,0 +1,28 @@
+{>"layouts/master" /}
+
+{<body}
+    <h1>{@pre type="content" key="greeting"/}</h1>
+    <h2>comment:</h2>
+    <p>
+    when call like this in controller,
+    <pre>
+    	res.render('index', data);
+    </pre>
+    if data has no properties like "views,settings,ext", it can run ok, </br>
+    BUT,when data has these properties,like this
+    <pre>
+    	var data = {
+        	name: 'test',
+        	views: 'this is test string!',
+        	settings: 'this is the data from models',
+        	ext:'but it will not ok!'
+        };
+
+
+        res.render('index', data);
+    </pre>
+    the programe will throw errors of 503.</br></br>
+    I find these errors is caused by adaro\lib\engine.js,adaro\lib\utils.js, in which the above three properties is used as important parameters, But these properties name can also be used as data for render. When your data has "views,settings,ext" properties name, the programe will core.
+
+    </p>
+{/body}
